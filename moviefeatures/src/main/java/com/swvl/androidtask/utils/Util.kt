@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.swvl.androidtask.pojo.Movie
-import com.swvl.androidtask.pojo.MoviesLst
+import com.swvl.androidtask.data.local.Movie
+import com.swvl.androidtask.data.local.MoviesLst
 import java.io.IOException
 
 //Singleton class where a single instance
