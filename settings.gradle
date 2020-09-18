@@ -1,0 +1,5 @@
+//to include the features that you want
+
+include ':core'
+include ':moviefeatures'
+rootProject.name = "SwvlTask"
