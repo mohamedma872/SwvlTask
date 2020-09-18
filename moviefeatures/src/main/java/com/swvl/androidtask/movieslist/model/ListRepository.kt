@@ -23,15 +23,12 @@ class ListRepository(
         //Observe changes to the db
         local.getMoviesFromDb()
             .performOnBackOutOnMain(scheduler)
-
             .subscribe({ movies ->
                 if (movies.isEmpty()) {
                     local.getMoviesFromAssets().subscribe({ assetsMovies ->
                         local.saveMovies(assetsMovies)
                         moviesFetchOutcome.success(movies)
                     }, { error -> handleError(error) })
-
-
                 } else {
                     moviesFetchOutcome.success(movies)
                 }
@@ -40,6 +37,16 @@ class ListRepository(
             .addTo(compositeDisposable)
     }
 
+    override fun searchForMovies(movietitle: String) {
+        moviesFetchOutcome.loading(true)
+        //Observe changes to the db
+        local.searchForMovies(movietitle)
+            .performOnBackOutOnMain(scheduler)
+            .subscribe({ movies ->
+                moviesFetchOutcome.success(movies)
+            }, { error -> handleError(error) })
+            .addTo(compositeDisposable)
+    }
 
     override fun handleError(error: Throwable) {
         moviesFetchOutcome.failed(error)

@@ -10,12 +10,14 @@ interface ListDataContract {
     interface Repository {
         val moviesFetchOutcome: PublishSubject<Outcome<List<Movie>>>
         fun fetchMovies()
+        fun searchForMovies(movietitle: String)
         fun handleError(error: Throwable)
     }
 
     interface Local {
         fun getMoviesFromAssets(): Flowable<List<Movie>>
         fun getMoviesFromDb(): Flowable<List<Movie>>
+        fun searchForMovies(movietitle: String): Flowable<List<Movie>>
         fun saveMovies(movies: List<Movie>)
     }
 
