@@ -1,4 +1,4 @@
-package com.swvl.androidtask.data.local
+package com.swvl.androidtask.commons.data.local
 
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
@@ -14,7 +14,7 @@ interface MovieDao {
     fun addMovies(movies: List<Movie>): List<Long>
 
     @RawQuery
-    fun findMoviesByTitle(query: SupportSQLiteQuery?): Flowable<List<Movie>>
+    fun findMoviesByTitle(query: SupportSQLiteQuery?): List<Movie>
 
 
     @Query("SELECT * FROM movie WHERE title=:title")

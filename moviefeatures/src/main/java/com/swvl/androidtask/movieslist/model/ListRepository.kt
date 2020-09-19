@@ -3,7 +3,7 @@ package com.swvl.androidtask.movieslist.model
 import com.egabi.core.extensions.*
 import com.egabi.core.networking.Outcome
 import com.egabi.core.networking.Scheduler
-import com.swvl.androidtask.data.local.Movie
+import com.swvl.androidtask.commons.data.local.Movie
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 
@@ -25,10 +25,11 @@ class ListRepository(
             .performOnBackOutOnMain(scheduler)
             .subscribe({ movies ->
                 if (movies.isEmpty()) {
-                    local.getMoviesFromAssets().subscribe({ assetsMovies ->
-                        local.saveMovies(assetsMovies)
-                        moviesFetchOutcome.success(movies)
-                    }, { error -> handleError(error) })
+                    local.getMoviesFromAssets().performOnBackOutOnMain(scheduler)
+                        .subscribe({ assetsMovies ->
+                            local.saveMovies(assetsMovies)
+                            moviesFetchOutcome.success(movies)
+                        }, { error -> handleError(error) })
                 } else {
                     moviesFetchOutcome.success(movies)
                 }

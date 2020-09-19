@@ -2,7 +2,7 @@ package com.swvl.androidtask.movieslist.model
 
 
 import com.egabi.core.networking.Outcome
-import com.swvl.androidtask.data.local.Movie
+import com.swvl.androidtask.commons.data.local.Movie
 import io.reactivex.Flowable
 import io.reactivex.subjects.PublishSubject
 

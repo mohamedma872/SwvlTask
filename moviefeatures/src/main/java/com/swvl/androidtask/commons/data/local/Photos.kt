@@ -1,4 +1,4 @@
-package com.swvl.androidtask.data.local
+package com.swvl.androidtask.commons.data.local
 
 import com.google.gson.annotations.SerializedName
 

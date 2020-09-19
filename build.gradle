@@ -11,7 +11,7 @@ buildscript {
             'androidPlugin'    : '4.0.1',
             'kotlin'           : '1.4.10',
             'gms'              : '4.3.3',
-            'dagger'           : '2.29.1',
+            'dagger'           : '2.12',
             'gson'             : '2.8.6',
             'retrofit'         : '2.9.0',
             'retrofitRxAdapter': '1.0.0',
@@ -106,7 +106,6 @@ buildscript {
     }
     dependencies {
         classpath deps.android.gradlePlugin
-        classpath deps.google.gmsPlugin
         classpath deps.kotlin.gradlePlugin
         def nav_version = "2.3.0-beta01"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"

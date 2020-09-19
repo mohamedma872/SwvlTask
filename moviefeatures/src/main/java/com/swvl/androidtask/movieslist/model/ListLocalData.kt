@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.sqlite.db.SimpleSQLiteQuery
 import com.egabi.core.extensions.performOnBack
 import com.egabi.core.networking.Scheduler
-import com.swvl.androidtask.data.local.Movie
-import com.swvl.androidtask.data.local.MoviesDb
+import com.swvl.androidtask.commons.data.local.Movie
+import com.swvl.androidtask.commons.data.local.MoviesDb
 import com.swvl.androidtask.utils.Util
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
@@ -29,9 +29,7 @@ class ListLocalData(
     }
 
     override fun searchForMovies(
-        movietitle: String,
-        maxResults: Int,
-        rating: Int
+        movietitle: String
     ): Flowable<List<Movie>> {
         val query = SimpleSQLiteQuery(
             "WITH TOPTEN AS (\n" +
@@ -46,9 +44,8 @@ class ListLocalData(
             arrayOf(movietitle)
         )
 
-        return movieDb.moviesDao().findMoviesByTitle(query).performOnBack(
-            scheduler
-        )
+        return Flowable.fromArray(movieDb.moviesDao().findMoviesByTitle(query))
+            .performOnBack(scheduler)
     }
 
     override fun saveMovies(movies: List<Movie>) {

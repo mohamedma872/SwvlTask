@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.egabi.core.extensions.toLiveData
 import com.egabi.core.networking.Outcome
-import com.swvl.androidtask.data.local.Movie
+import com.swvl.androidtask.commons.data.local.Movie
 import com.swvl.androidtask.movieslist.model.ListDataContract
 import io.reactivex.disposables.CompositeDisposable
 
@@ -13,7 +13,7 @@ class ListViewModel(
     private val compositeDisposable: CompositeDisposable
 ) : ViewModel() {
 
-    private val moviesOutcome: LiveData<Outcome<List<Movie>>> by lazy {
+    val moviesOutcome: LiveData<Outcome<List<Movie>>> by lazy {
         //Convert publish subject to livedata
         repo.moviesFetchOutcome.toLiveData(compositeDisposable)
     }

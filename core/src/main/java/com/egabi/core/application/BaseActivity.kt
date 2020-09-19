@@ -1,24 +1,14 @@
 package com.egabi.core.application
 
-import android.content.res.Resources
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import com.egabi.core.constants.Constants
-import java.util.*
 
 
 abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpToolbar()
-        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val language = sharedPreferences.getString("language", "en").also { lang ->
-            setLocale(lang)
-            Constants.language=lang.toUpperCase(Locale.ROOT)
-        }
-
     }
 
     private fun setUpToolbar() {
@@ -32,16 +22,5 @@ abstract class BaseActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    private fun setLocale(newLanguage: String)  {
-
-    val res: Resources = this.resources
-
-    val dm = res.displayMetrics
-    val conf = res.configuration
-        conf.setLocale(Locale(newLanguage)) // API 17+ only.
-
-    res.updateConfiguration(conf, dm)
-    }
-
 
 }
