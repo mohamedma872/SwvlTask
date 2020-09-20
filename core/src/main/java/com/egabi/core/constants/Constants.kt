@@ -2,22 +2,11 @@ package com.egabi.core.constants
 
 
 object Constants {
-
-    const val API_URL = ""
-    var language = "EN"
-
+    const val Flicker_API_URL = "https://api.flickr.com/services/"
     object Movies {
         val DB_NAME = "posts_db"
     }
 
-    val langCode: String
-        inline get() {
-            return if (language == "EN") {
-                "En"
-            } else {
-                "Ar"
-            }
-        }
 
 }
 

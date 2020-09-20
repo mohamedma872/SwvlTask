@@ -14,11 +14,11 @@ class Util private constructor() {
 
     companion object {
         private lateinit var instance: Util
-        var baseURL = "https://api.flickr.com/services/"
+
         var method = "flickr.photos.search"
-        var api_key = "102e64c2bfd77b0554bad88072204edb"
+        var api_key = "52cdd04ecd2686efacbd43e6d38ea24e"
         var format = "json"
-        var nojsoncallback = 1
+        var nojsoncallback = "1"
         var page = 1
         var per_page = 10
 

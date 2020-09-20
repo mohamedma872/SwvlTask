@@ -8,29 +8,12 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
-import okhttp3.MediaType
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
-import okio.*
-import org.greenrobot.eventbus.EventBus
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
-import java.security.KeyManagementException
-import java.security.KeyStore
-import java.security.KeyStoreException
-import java.security.NoSuchAlgorithmException
-import java.security.cert.Certificate
-import java.security.cert.CertificateFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.TrustManagerFactory
-import javax.net.ssl.X509TrustManager
-import javax.security.cert.CertificateException
 
 
 @Module
@@ -43,7 +26,7 @@ class NetworkModule {
         rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
         okHttpClient: OkHttpClient
     ): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.API_URL)
+        return Retrofit.Builder().baseUrl(Constants.Flicker_API_URL)
             .addConverterFactory(gsonConverterFactory)
             .addCallAdapterFactory(rxJava2CallAdapterFactory)
             .client(okHttpClient)

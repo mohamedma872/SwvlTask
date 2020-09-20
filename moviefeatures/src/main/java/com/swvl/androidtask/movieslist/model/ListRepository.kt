@@ -4,16 +4,18 @@ import com.egabi.core.extensions.*
 import com.egabi.core.networking.Outcome
 import com.egabi.core.networking.Scheduler
 import com.swvl.androidtask.commons.data.local.Movie
+import com.swvl.androidtask.commons.data.remote.Photo
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
-
-
 class ListRepository(
     private val local: ListDataContract.Local,
     private val scheduler: Scheduler,
-    private val compositeDisposable: CompositeDisposable
+    private val compositeDisposable: CompositeDisposable,
+    private val remote: ListDataContract.Remote
 ) : ListDataContract.Repository {
     override val moviesFetchOutcome: PublishSubject<Outcome<List<Movie>>> =
+        PublishSubject.create()
+    override val moviesPicturesFetchOutcome: PublishSubject<Outcome<List<Photo>>> =
         PublishSubject.create()
 
 
@@ -62,6 +64,17 @@ class ListRepository(
             .subscribe({ movies ->
 
                 moviesFetchOutcome.success(movies)
+            }, { error -> handleError(error) })
+            .addTo(compositeDisposable)
+    }
+
+    override fun searchMoviePictures(movietitle: String) {
+        moviesFetchOutcome.loading(true)
+        //Observe changes to the db
+        remote.searchMoviePictures(movietitle)
+            .performOnBackOutOnMain(scheduler)
+            .subscribe({ movies ->
+                moviesPicturesFetchOutcome.success(movies.photos.photo)
             }, { error -> handleError(error) })
             .addTo(compositeDisposable)
     }

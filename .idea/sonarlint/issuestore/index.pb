@@ -89,3 +89,7 @@ f
 6moviefeatures/src/main/res/layout/item_movies_list.xml,3/3/3383288532840d543a4b3ba3eb1d40c66bbd6b6b
 h
 8moviefeatures/src/main/res/layout/item_pictures_list.xml,4/7/47edf78fb9ca3a35eb5668c6f43f1c347d585a2c
+m
+=moviefeatures/src/main/res/drawable/ic_baseline_search_24.xml,e/a/ea1952da6033ad7ff3b2a163cb881458151c77d4
+e
+5moviefeatures/src/main/res/layout/movies_activity.xml,f/d/fdab7ff57612f9019c118bce40e844eb51fa50a0

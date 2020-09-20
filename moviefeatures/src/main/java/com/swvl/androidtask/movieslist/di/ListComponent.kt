@@ -7,6 +7,7 @@ import com.egabi.core.di.CoreComponent
 import com.egabi.core.networking.Scheduler
 import com.squareup.picasso.Picasso
 import com.swvl.androidtask.commons.data.local.MoviesDb
+import com.swvl.androidtask.commons.data.remote.FlickerService
 import com.swvl.androidtask.movieslist.adapter.MoviesAdapter
 import com.swvl.androidtask.movieslist.model.ListDataContract
 import com.swvl.androidtask.movieslist.model.ListLocalData
@@ -17,6 +18,7 @@ import dagger.Component
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
+import retrofit2.Retrofit
 
 @ListScope
 @Component(dependencies = [CoreComponent::class], modules = [ListModule::class])
@@ -76,5 +78,8 @@ class ListModule {
         Room.databaseBuilder(context, MoviesDb::class.java, Constants.Movies.DB_NAME)
             .allowMainThreadQueries().build()
 
-
+    @Provides
+    @ListScope
+    fun provideService(retrofit: Retrofit): FlickerService =
+        retrofit.create(FlickerService::class.java)
 }
