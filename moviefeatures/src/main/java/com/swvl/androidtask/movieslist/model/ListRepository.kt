@@ -41,13 +41,27 @@ class ListRepository(
     override fun searchForMovies(movietitle: String) {
         moviesFetchOutcome.loading(true)
         //Observe changes to the db
-        local.searchForMovies("%$movietitle%")
+        local.getMoviesFromDb()
             .performOnBackOutOnMain(scheduler)
             .subscribe({ movies ->
-                val filtered = movies.filter { it.title.contains(movietitle) }
+                val filtered = movies
+                    .filter { it.title.toLowerCase().contains(movietitle.toLowerCase()) }
                     .sortedWith(compareByDescending({ it.year }, { it.rating }))
-                    .groupBy { t -> t.year }.flatMap { (key, lst) -> lst.take(5) }
+                    .groupBy { t -> t.year }
+                    .flatMap { (_, lst) -> lst.take(5) }
                 moviesFetchOutcome.success(filtered)
+            }, { error -> handleError(error) })
+            .addTo(compositeDisposable)
+    }
+
+    override fun searchForMoviesByQuery(movietitle: String) {
+        moviesFetchOutcome.loading(true)
+        //Observe changes to the db
+        local.searchForMoviesByQuery("%$movietitle%")
+            .performOnBackOutOnMain(scheduler)
+            .subscribe({ movies ->
+
+                moviesFetchOutcome.success(movies)
             }, { error -> handleError(error) })
             .addTo(compositeDisposable)
     }

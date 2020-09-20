@@ -24,10 +24,11 @@ class ListViewModel(
     }
 
     fun searchForMovies(tittle: String) {
-        if (tittle.isNullOrEmpty()) {
+        if (tittle.isEmpty()) {
             repo.fetchMovies()
         } else {
             repo.searchForMovies(tittle)
+            //repo.searchForMoviesByQuery(tittle)
         }
 
     }
