@@ -13,8 +13,8 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addMovies(movies: List<Movie>): List<Long>
 
-    @RawQuery
-    fun findMoviesByTitle(query: SupportSQLiteQuery?): List<Movie>
+    @RawQuery(observedEntities = [Movie::class])
+    fun findMoviesByTitle(query: SupportSQLiteQuery?): Flowable<List<Movie>>
 
 
     @Query("SELECT * FROM movie WHERE title=:title")

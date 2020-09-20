@@ -41,10 +41,13 @@ class ListRepository(
     override fun searchForMovies(movietitle: String) {
         moviesFetchOutcome.loading(true)
         //Observe changes to the db
-        local.searchForMovies(movietitle)
+        local.searchForMovies("%$movietitle%")
             .performOnBackOutOnMain(scheduler)
             .subscribe({ movies ->
-                moviesFetchOutcome.success(movies)
+                val filtered = movies.filter { it.title.contains(movietitle) }
+                    .sortedWith(compareByDescending({ it.year }, { it.rating }))
+                    .groupBy { t -> t.year }.flatMap { (key, lst) -> lst.take(5) }
+                moviesFetchOutcome.success(filtered)
             }, { error -> handleError(error) })
             .addTo(compositeDisposable)
     }
@@ -54,4 +57,8 @@ class ListRepository(
     }
 
 
+}
+
+fun <T> compareByDescending(vararg selectors: (T) -> Comparable<*>?): Comparator<T> {
+    return Comparator { b, a -> compareValuesBy(a, b, *selectors) }
 }

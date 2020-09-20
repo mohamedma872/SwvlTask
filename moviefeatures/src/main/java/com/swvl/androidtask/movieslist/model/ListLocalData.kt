@@ -1,7 +1,6 @@
 package com.swvl.androidtask.movieslist.model
 
 import android.content.Context
-import androidx.sqlite.db.SimpleSQLiteQuery
 import com.egabi.core.extensions.performOnBack
 import com.egabi.core.networking.Scheduler
 import com.swvl.androidtask.commons.data.local.Movie
@@ -31,20 +30,20 @@ class ListLocalData(
     override fun searchForMovies(
         movietitle: String
     ): Flowable<List<Movie>> {
-        val query = SimpleSQLiteQuery(
-            "WITH TOPTEN AS (\n" +
-                    "    SELECT *, ROW_NUMBER() \n" +
-                    "    over (\n" +
-                    "        PARTITION BY Movie.year\n" +
-                    "        order by Movie.year , Movie.rating DESC\n" +
-                    "    ) AS RowNo \n" +
-                    "    FROM Movie\n" +
-                    ")\n" +
-                    "SELECT * FROM TOPTEN WHERE RowNo <= 5  and  TOPTEN.title like ? order by TOPTEN.year  DESC",
-            arrayOf(movietitle)
-        )
 
-        return Flowable.fromArray(movieDb.moviesDao().findMoviesByTitle(query))
+
+//        val query = SimpleSQLiteQuery(
+//            "WITH RECURSIVE TOPfive AS "+
+//               " ("+
+//                "SELECT *, ROW_NUMBER()"+
+//                  "  over ("+
+//                    "PARTITION BY Movie.year"+
+//                        "    order by Movie.year , Movie.rating DESC"+
+//            ") AS RowNo FROM Movie)"+
+//       " SELECT * FROM TOPfive WHERE RowNo <= 5  and  TOPfive.title like '%the%' order by TOPfive.year  DESC;"
+//        )
+//val movies = movieDb.moviesDao().getMovies()
+        return movieDb.moviesDao().getMovies()
             .performOnBack(scheduler)
     }
 

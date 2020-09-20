@@ -7,14 +7,24 @@
     android:layout_height="match_parent"
     tools:context=".movieslist.view.MoviesActivity">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/sv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+    <EditText
+        android:id="@+id/search_et"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/tertiary_text_light"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:ems="10"
+        android:hint="search by movie tittle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:imeOptions="actionSearch"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="10dp"
+        android:textSize="13sp"
+        tools:ignore="MissingConstraints,TextFields" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv"
@@ -24,5 +34,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sv" />
+        app:layout_constraintTop_toBottomOf="@id/search_et" />
 </androidx.constraintlayout.widget.ConstraintLayout>

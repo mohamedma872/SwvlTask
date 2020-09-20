@@ -73,7 +73,8 @@ class ListModule {
     @Provides
     @ListScope
     fun postDb(context: Context): MoviesDb =
-        Room.databaseBuilder(context, MoviesDb::class.java, Constants.Movies.DB_NAME).build()
+        Room.databaseBuilder(context, MoviesDb::class.java, Constants.Movies.DB_NAME)
+            .allowMainThreadQueries().build()
 
 
 }

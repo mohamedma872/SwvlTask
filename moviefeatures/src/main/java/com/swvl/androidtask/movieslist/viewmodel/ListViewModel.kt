@@ -23,6 +23,14 @@ class ListViewModel(
             repo.fetchMovies()
     }
 
+    fun searchForMovies(tittle: String) {
+        if (tittle.isNullOrEmpty()) {
+            repo.fetchMovies()
+        } else {
+            repo.searchForMovies(tittle)
+        }
+
+    }
 
     override fun onCleared() {
         super.onCleared()

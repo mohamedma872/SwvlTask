@@ -3,7 +3,7 @@ package com.swvl.androidtask.commons.data.local
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "MOVIE")
 data class Movie(
     val cast: ArrayList<String>,
     val genres: ArrayList<String>,

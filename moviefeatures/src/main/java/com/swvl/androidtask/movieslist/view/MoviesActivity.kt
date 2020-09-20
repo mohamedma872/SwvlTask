@@ -3,6 +3,8 @@ package com.swvl.androidtask.movieslist.view
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,6 +47,14 @@ class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
         rv.adapter = adapter
         viewModel.getMoviesList()
         initiateDataListener()
+        search_et.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                viewModel.searchForMovies(search_et.text.toString()).let {
+                    return@OnEditorActionListener true
+                }
+            }
+            false
+        })
     }
 
     private fun initiateDataListener() {
