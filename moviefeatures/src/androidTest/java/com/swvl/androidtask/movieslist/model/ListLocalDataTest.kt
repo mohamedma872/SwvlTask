@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.platform.app.InstrumentationRegistry
 import com.egabi.core.testing.TestScheduler
 import com.swvl.androidtask.commons.data.local.MovieDao
 import com.swvl.androidtask.commons.data.local.MoviesDb
@@ -11,13 +12,12 @@ import com.swvl.androidtask.commons.testing.DummyData
 import org.junit.*
 import java.io.IOException
 
-
 internal class ListLocalDataTest {
 
     private lateinit var movieDao: MovieDao
     private lateinit var movieDatabase: MoviesDb
     private lateinit var listLocalData: ListLocalData
-    val context = ApplicationProvider.getApplicationContext<Context>()
+    private val context: Context = ApplicationProvider.getApplicationContext()
 
     //Necessary for Room insertions to work
     @get:Rule
@@ -25,10 +25,13 @@ internal class ListLocalDataTest {
 
     @Before
     fun setUp() {
+        //instrumentationContext = InstrumentationRegistry.getInstrumentation().context
         movieDatabase = Room.inMemoryDatabaseBuilder(context, MoviesDb::class.java).build()
         movieDao = movieDatabase.moviesDao()
         listLocalData = ListLocalData(
-            movieDatabase, TestScheduler(), context
+            movieDatabase,
+            TestScheduler(),
+            InstrumentationRegistry.getInstrumentation().targetContext
         )
     }
 

@@ -101,3 +101,13 @@ Xmoviefeatures/src/main/java/com/swvl/androidtask/movieslist/view/MovieDetailsAc
 Vmoviefeatures/src/main/java/com/swvl/androidtask/movieslist/adapter/PicturesAdapter.kt,3/8/3855086f07b0ae368d09e19624a93b68b48791ef
 ç
 ]moviefeatures/src/androidTest/java/com/swvl/androidtask/movieslist/model/ListLocalDataTest.kt,6/e/6e0ab3173e45007f951473447d9fdfaa35561c09
+o
+?core/src/main/java/com/egabi/core/testing/DependencyProvider.kt,f/8/f8b6e726bb8e00bec5b685e63dcd1f534bb270e4
+u
+Emoviefeatures/src/test/java/com/swvl/list/model/ListRemoteDataTest.kt,b/f/bfde72f4e6e5d4ca4da10e05b68c06825495802b
+}
+Mmoviefeatures/src/main/java/com/swvl/androidtask/commons/testing/DummyData.kt,b/f/bfc64e40108459abe3e4f0b6fcbf8ec2671f8fac
+u
+Emoviefeatures/src/test/java/com/swvl/list/model/ListRepositoryTest.kt,c/1/c13acc36b45b49e5f707ca6b18560c639fd87bdb
+x
+Hmoviefeatures/src/test/java/com/swvl/list/viewmodel/ListViewModelTest.kt,d/e/de557790bbfa7d59491a33fb0473a82f7989f583
