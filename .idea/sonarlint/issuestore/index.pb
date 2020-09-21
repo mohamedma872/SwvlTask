@@ -83,12 +83,6 @@ l
 <moviefeatures/src/main/res/drawable/ic_baseline_grade_24.xml,c/f/cfdab3d0d71c26f51867548431748c2d6acca654
 Z
 *moviefeatures/src/main/AndroidManifest.xml,d/9/d9839380fb8fb852c94460d948df231a5d299544
-e
-5moviefeatures/src/main/res/layout/detail_activity.xml,b/2/b2bb747d70d9902bed6e1307304119c9f0343f6b
-f
-6moviefeatures/src/main/res/layout/item_movies_list.xml,3/3/3383288532840d543a4b3ba3eb1d40c66bbd6b6b
-h
-8moviefeatures/src/main/res/layout/item_pictures_list.xml,4/7/47edf78fb9ca3a35eb5668c6f43f1c347d585a2c
 m
 =moviefeatures/src/main/res/drawable/ic_baseline_search_24.xml,e/a/ea1952da6033ad7ff3b2a163cb881458151c77d4
 e

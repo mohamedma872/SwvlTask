@@ -9,7 +9,7 @@ import io.reactivex.Single
 class ListRemoteData(val service: FlickerService) : ListDataContract.Remote {
 
 
-    override fun searchMoviePictures(title: String): Single<RecentResponse>? {
+    override fun searchMoviePictures(title: String): Single<RecentResponse> {
         return service.searchForPhotos(
             Util.method,
             Util.api_key,

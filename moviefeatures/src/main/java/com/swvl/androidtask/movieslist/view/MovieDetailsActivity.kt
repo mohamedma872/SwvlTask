@@ -1,13 +1,8 @@
 package com.swvl.androidtask.movieslist.view
 
-import android.content.Context
-import android.content.Intent
+
 import android.os.Bundle
-import android.util.Log
-import android.view.inputmethod.EditorInfo
-import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.egabi.core.application.BaseActivity
 import com.egabi.core.networking.Outcome
@@ -15,14 +10,15 @@ import com.google.gson.Gson
 import com.swvl.androidtask.R
 import com.swvl.androidtask.commons.MovieDH
 import com.swvl.androidtask.commons.data.local.Movie
-import com.swvl.androidtask.movieslist.adapter.MoviesAdapter
+import com.swvl.androidtask.movieslist.adapter.PicturesAdapter
 import com.swvl.androidtask.movieslist.viewmodel.ListViewModel
 import com.swvl.androidtask.movieslist.viewmodel.ListViewModelFactory
-import kotlinx.android.synthetic.main.movies_activity.*
+import kotlinx.android.synthetic.main.detail_activity.*
+import kotlinx.android.synthetic.main.item_movies_list.*
 import java.io.IOException
 import javax.inject.Inject
 
-class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
+class MovieDetailsActivity : BaseActivity() {
 
     private val component by lazy { MovieDH.listComponent() }
 
@@ -30,57 +26,53 @@ class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
     lateinit var viewModelFactory: ListViewModelFactory
 
     @Inject
-    lateinit var adapter: MoviesAdapter
+    lateinit var adapter: PicturesAdapter
 
     private val viewModel: ListViewModel by lazy {
         ViewModelProvider(this, viewModelFactory).get(ListViewModel::class.java)
     }
 
-    private val context: Context by lazy { this }
-
-    private val TAG = "ListActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.movies_activity)
+        setContentView(R.layout.detail_activity)
         component.inject(this)
-        adapter.interaction = this
-        rv.adapter = adapter
-        viewModel.getMoviesList()
+        initRescylceView()
         initiateDataListener()
-        search_et.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                viewModel.searchForMovies(search_et.text.toString()).let {
-                    return@OnEditorActionListener true
-                }
-            }
-            false
-        })
+        intent.getStringExtra("movie")?.run {
+            val movieobj = Gson().fromJson(this, Movie::class.java)
+            tvTitle.text = movieobj.title
+            tvYear.text = movieobj.year.toString()
+            tvCast.text = movieobj.cast.joinToString()
+            tvGenre.text = movieobj.genres.joinToString()
+            tvrating.text = movieobj.rating.toFloat().toString()
+            viewModel.searchForPohotos(movieobj.title)
+        }
     }
+
 
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly
-        viewModel.moviesOutcome.observe(this, Observer<Outcome<List<Movie>>> { outcome ->
-            Log.d(TAG, "initiateDataListener: $outcome")
+        viewModel.picturesOutcome.observe(this, { outcome ->
+            // Log.d(TAG, "initiateDataListener: $outcome")
             when (outcome) {
 
                 is Outcome.Progress -> outcome.loading
                 is Outcome.Success -> {
-                    Log.d(TAG, "initiateDataListener: Successfully loaded data")
-                    adapter.swapData(outcome.data)
+                    // Log.d(TAG, "initiateDataListener: Successfully loaded data")
+                    adapter.addPhotos(outcome.data)
                 }
 
                 is Outcome.Failure -> {
 
                     if (outcome.e is IOException)
                         Toast.makeText(
-                            context,
+                            this,
                             outcome.e.localizedMessage,
                             Toast.LENGTH_LONG
                         ).show()
                     else
                         Toast.makeText(
-                            context,
+                            this,
                             "try again later",
                             Toast.LENGTH_LONG
                         ).show()
@@ -88,15 +80,11 @@ class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
 
             }
         })
+
     }
 
-    override fun postClicked(movieObject: Movie) {
-        startActivity(
-            Intent(context, MovieDetailsActivity::class.java).putExtra(
-                "movie",
-                Gson().toJson(movieObject)
-            )
-        )
+    private fun initRescylceView() {
+        rvpictures.adapter = adapter
     }
 
 
