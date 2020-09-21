@@ -25,7 +25,26 @@ Some of the features of the app include
 # Networking
 ![Data flow Diagram](DataFlow.png)
 
+# Search By Movie Tittle:
+i have two solution :
+1- write sql subquery to search for movie by tittle:
 
+SELECT M.*
+FROM Movie M
+Where Id IN (SELECT M2.ID
+                    FROM Movie M2
+                    WHERE M2.Year = M.Year  AND  M2.title  like ? 
+ Order By M2.Rating DESC
+LIMIT 5
+                   )   
+Order By M.Year DESC, M.Rating  DESC;
+
+2- use kotlin high order functions to search for the movie:
+val filtered = movies
+                    .filter { it.title.toLowerCase().contains(movietitle.toLowerCase()) }
+                    .sortedWith(compareByDescending({ it.year }, { it.rating }))
+                    .groupBy { t -> t.year }
+                    .flatMap { (_, lst) -> lst.take(5) }
 
 # Testing:
 To run all the unit tests, run `./gradlew test`. This would test the repositories and the viewmodels.
