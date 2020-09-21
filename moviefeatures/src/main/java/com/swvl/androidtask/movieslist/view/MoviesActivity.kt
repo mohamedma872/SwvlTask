@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.egabi.core.application.BaseActivity
 import com.egabi.core.networking.Outcome
@@ -60,7 +59,7 @@ class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
 
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly
-        viewModel.moviesOutcome.observe(this, Observer<Outcome<List<Movie>>> { outcome ->
+        viewModel.moviesOutcome.observe(this, { outcome ->
             Log.d(TAG, "initiateDataListener: $outcome")
             when (outcome) {
 
