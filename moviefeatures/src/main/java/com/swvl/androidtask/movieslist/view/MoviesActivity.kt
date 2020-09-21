@@ -47,7 +47,7 @@ class MoviesActivity : BaseActivity(), MoviesAdapter.Interaction {
         rv.adapter = adapter
         viewModel.getMoviesList()
         initiateDataListener()
-        search_et.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        search_et.setOnEditorActionListener(TextView.OnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 viewModel.searchForMovies(search_et.text.toString()).let {
                     return@OnEditorActionListener true

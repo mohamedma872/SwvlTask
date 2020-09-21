@@ -44,7 +44,7 @@ class ListModule {
     /*Adapter*/
     @Provides
     @ListScope
-    fun adapter(picasso: Picasso): MoviesAdapter = MoviesAdapter()
+    fun adapter(): MoviesAdapter = MoviesAdapter()
 
     /*ViewModel*/
     @Provides

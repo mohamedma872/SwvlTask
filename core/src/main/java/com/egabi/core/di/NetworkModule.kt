@@ -37,7 +37,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(cache: Cache, context: Context): OkHttpClient {
+    fun providesOkHttpClient(cache: Cache): OkHttpClient {
 
         val client = OkHttpClient.Builder()
             .cache(cache)

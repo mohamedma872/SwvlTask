@@ -36,7 +36,7 @@ class PicturesAdapter(
     override fun onBindViewHolder(holder: VH, position: Int) {
         val pic = list[position]
         Picasso.get()
-            .load(pic.url_l)
+            .load(pic.getImageURL())
             .centerCrop()
             .fit()
             .placeholder(
