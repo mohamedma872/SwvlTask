@@ -81,8 +81,6 @@ Z
 *moviefeatures/src/main/AndroidManifest.xml,d/9/d9839380fb8fb852c94460d948df231a5d299544
 m
 =moviefeatures/src/main/res/drawable/ic_baseline_search_24.xml,e/a/ea1952da6033ad7ff3b2a163cb881458151c77d4
-e
-5moviefeatures/src/main/res/layout/movies_activity.xml,f/d/fdab7ff57612f9019c118bce40e844eb51fa50a0
 †
 Vmoviefeatures/src/main/java/com/swvl/androidtask/commons/data/remote/FlickerService.kt,2/0/20e9bb10e73005d71b6651c27dcf231ba6d2d0b8
 …
@@ -111,3 +109,7 @@ u
 Emoviefeatures/src/test/java/com/swvl/list/model/ListRepositoryTest.kt,c/1/c13acc36b45b49e5f707ca6b18560c639fd87bdb
 x
 Hmoviefeatures/src/test/java/com/swvl/list/viewmodel/ListViewModelTest.kt,d/e/de557790bbfa7d59491a33fb0473a82f7989f583
+X
+(gradle/wrapper/gradle-wrapper.properties,f/b/fbe448ebfc3eb2d4e308f6b8b043666f5b57235e
+a
+1core/src/main/res/xml/network_security_config.xml,2/2/22cac58295a5ddc8b83c669444d7b4195f76eb60

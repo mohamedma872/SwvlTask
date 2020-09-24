@@ -13,7 +13,6 @@
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/tertiary_text_light"
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:ems="10"
         android:hint="search by movie tittle"
@@ -24,6 +23,9 @@
         android:paddingStart="15dp"
         android:paddingEnd="10dp"
         android:textSize="13sp"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
         tools:ignore="MissingConstraints,TextFields" />
 
     <androidx.recyclerview.widget.RecyclerView
